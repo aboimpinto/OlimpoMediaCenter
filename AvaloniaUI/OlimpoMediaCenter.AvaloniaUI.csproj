@@ -5,14 +5,18 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
   <ItemGroup>
-    <Folder Include="Models\" />
-    <AvaloniaResource Include="Assets\**" />
+    <Folder Include="Models\"/>
+    <AvaloniaResource Include="Assets\**"/>
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Avalonia" Version="*" />
-    <PackageReference Include="Avalonia.Desktop" Version="*" />
-    <PackageReference Include="Avalonia.Diagnostics" Version="*" />
-    <PackageReference Include="Avalonia.ReactiveUI" Version="*" />
-    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="*" />
+    <PackageReference Include="Avalonia" Version="*"/>
+    <PackageReference Include="Avalonia.Desktop" Version="*"/>
+    <PackageReference Include="Avalonia.Diagnostics" Version="*"/>
+    <PackageReference Include="Avalonia.ReactiveUI" Version="*"/>
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="*"/>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="*"/>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\MediaCenter.Model\MediaCenter.Model.csproj"/>
   </ItemGroup>
 </Project>

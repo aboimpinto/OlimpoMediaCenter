@@ -4,7 +4,7 @@ namespace OlimpoMediaCenter.AvaloniaUI.DIContainer
 {
     public class ServiceLocator : IServiceLocator
     {
-        private static IServiceLocator _current;
+        private static IServiceLocator _current = new ServiceLocator();
 
         public ServiceCollection ServiceCollection { get; set; }
 
@@ -14,14 +14,13 @@ namespace OlimpoMediaCenter.AvaloniaUI.DIContainer
         {
             get
             {
-                if (_current == null)
-                {
-                    _current = new ServiceLocator();
-                    _current.ServiceCollection.AddSingleton<IServiceLocator>(_current);
-                }
-
                 return _current;
             }
+        }
+
+        static ServiceLocator()
+        {
+            _current.ServiceCollection.AddSingleton<IServiceLocator>(_current);
         }
 
         public ServiceLocator()
