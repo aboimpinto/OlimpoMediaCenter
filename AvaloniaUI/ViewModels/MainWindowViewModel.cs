@@ -1,12 +1,11 @@
-﻿using System;
-using System.Diagnostics;
-using System.Linq;
+﻿using System.Collections.ObjectModel;
 using System.Reactive.Disposables;
 using System.Threading.Tasks;
 using AvaloniaUI.DbServices;
+using AvaloniaUI.Extensions;
+using MediaCenter.Model;
 using Microsoft.EntityFrameworkCore;
 using ReactiveUI;
-// using OlimpoMediaCenter.AvaloniaUI.DbServices;
 
 namespace OlimpoMediaCenter.AvaloniaUI.ViewModels
 {
@@ -14,6 +13,8 @@ namespace OlimpoMediaCenter.AvaloniaUI.ViewModels
     {
         private string _greeting = string.Empty;
         private readonly IChannelsContext _dbContext;
+
+        public ObservableCollection<Channel> Channels { get; private set; }
 
         public string Greeting 
         { 
@@ -25,18 +26,17 @@ namespace OlimpoMediaCenter.AvaloniaUI.ViewModels
         {
             this._dbContext = dbContext;
 
+            this.Channels = new ObservableCollection<Channel>();
+
             this.WhenActivated(async (d) => await OnActivated(d));
         }
 
         private async Task OnActivated(CompositeDisposable d)
         {
-            Debug.WriteLine($"{DateTime.Now:dd HH:mm:ss.fffff}: MainWindowViewModel: OnActivated");
+            var channels = await this._dbContext.Channels.ToListAsync();
+            this.Channels.AddEntities(channels);
 
-            var channelCount = await this._dbContext.Channels.CountAsync();
-
-            this.Greeting = $"Hello World from OnActivated : {channelCount}";
-
-            await Task.FromResult(Task.CompletedTask);
+            this.Greeting = $"Hello World from OnActivated : {this.Channels.Count}";
         }
     }
 }

@@ -19,7 +19,7 @@ namespace OlimpoMediaCenter.AvaloniaUI.ViewModels
 
         private async Task OnActivated(CompositeDisposable disposables)
         { 
-            Debug.WriteLine($"{DateTime.Now:dd HH:mm:ss.fffff}: ViewModelBase: OnActivated");
+            // Debug.WriteLine($"{DateTime.Now:dd HH:mm:ss.fffff}: ViewModelBase: OnActivated");
 
 			try
 			{
