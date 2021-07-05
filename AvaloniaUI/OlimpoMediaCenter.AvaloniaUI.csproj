@@ -15,6 +15,8 @@
     <PackageReference Include="Avalonia.ReactiveUI" Version="*"/>
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="*"/>
     <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="*"/>
+    <PackageReference Include="Avalonia.Xaml.Interactions" Version="*"/>
+    <PackageReference Include="Avalonia.Xaml.Interactivity" Version="*"/>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\MediaCenter.Model\MediaCenter.Model.csproj"/>

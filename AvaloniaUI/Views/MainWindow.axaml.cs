@@ -1,4 +1,5 @@
 using Avalonia;
+using Avalonia.Input;
 using Avalonia.Markup.Xaml;
 using Avalonia.ReactiveUI;
 using OlimpoMediaCenter.AvaloniaUI.ViewModels;
@@ -18,6 +19,11 @@ namespace OlimpoMediaCenter.AvaloniaUI.Views
         private void InitializeComponent()
         {
             AvaloniaXamlLoader.Load(this);
+        }
+
+        private void lbox_KeyDown(object sender, KeyEventArgs e)
+        {
+            
         }
     }
 }

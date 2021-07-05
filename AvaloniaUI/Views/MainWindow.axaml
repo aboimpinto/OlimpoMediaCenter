@@ -4,16 +4,61 @@
     xmlns:vm="using:OlimpoMediaCenter.AvaloniaUI.ViewModels"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:i="using:Avalonia.Xaml.Interactivity"
+    xmlns:ia="using:Avalonia.Xaml.Interactions.Core"
+    xmlns:views="clr-namespace:AvaloniaUI.Views"
+    xmlns:controls="clr-namespace:AvaloniaUI.Controls"
     x:Class="OlimpoMediaCenter.AvaloniaUI.Views.MainWindow"
     Icon="/Assets/avalonia-logo.ico"
     Title="OlimpoMediaCenter.AvaloniaUI"
-    Width="1024"
-    Height="768">
+    Width="1280"
+    Height="720">
     <!-- WindowState="Maximized" -->
 
     <Design.DataContext>
         <vm:MainWindowViewModel/>
     </Design.DataContext>
+
+    <Window.Resources>
+        <DataTemplate x:Key="ChannelMatrixItem">
+            <StackPanel Margin="10" Orientation="Vertical">
+                <Image Width="200" Stretch="Uniform" Source="{Binding Logo}" />
+                <TextBlock Text="{Binding Name}" />
+            </StackPanel>    
+        </DataTemplate>
+
+        <DataTemplate x:Key="ChannelsMatrixRowTemplate">
+            <ItemsControl Items="{Binding}">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <StackPanel Orientation="Horizontal" />
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+
+                <ItemsControl.DataTemplates>
+                    <views:ChannelItemTemplateSelector>
+                        <DataTemplate x:Key="ChannelMatrixItem">
+                            <StackPanel Margin="10" Orientation="Vertical">
+                                <Image Width="200" Stretch="Uniform" Source="{Binding Logo}" />
+                                <TextBlock Text="{Binding Name}" />
+                            </StackPanel>    
+                        </DataTemplate>
+
+                        <DataTemplate x:Key="ChannelMatrixItemHighlighted">
+                            <StackPanel Margin="10" Orientation="Vertical">
+                                <Image Width="200" Stretch="Uniform" Source="{Binding Logo}" />
+                                <TextBlock Text="{Binding Name}" Background="Red" />
+                            </StackPanel>    
+                        </DataTemplate>
+                    </views:ChannelItemTemplateSelector>
+                </ItemsControl.DataTemplates>
+            </ItemsControl>
+        </DataTemplate>
+    </Window.Resources>
+
+    <Window.Styles>
+        
+    </Window.Styles>
 
     <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
         <Grid.RowDefinitions>
@@ -21,13 +66,24 @@
             <RowDefinition />
             <RowDefinition />
         </Grid.RowDefinitions>
-        <ItemsControl Items="{Binding Channels}" />
+        
+        <ItemsControl 
+            Items="{Binding ChannelsMatrix}"
+            ItemTemplate="{StaticResource ChannelsMatrixRowTemplate}">
 
-        <!-- <TextBlock Grid.Row="0" Text="{Binding Greeting}" />
-        <ListBox Grid.Row="1" Items="{Binding Channels}" />
-        <TextBlock Grid.Row="2" Text="{Binding Greeting}" /> -->
+            <ItemsControl.Template>
+                <ControlTemplate>
+                    <ScrollViewer Padding="5">
+                        <ItemsPresenter />
+                    </ScrollViewer>
+                </ControlTemplate>
+            </ItemsControl.Template>
+        </ItemsControl>
     </Grid>
 
-    <!-- <TextBlock Text="{Binding Greeting}" HorizontalAlignment="Center" VerticalAlignment="Center"/> -->
-
+    <i:Interaction.Behaviors>
+        <ia:EventTriggerBehavior EventName="KeyDown">
+            <ia:InvokeCommandAction Command="{Binding KeyDownPressedCommand}" />
+        </ia:EventTriggerBehavior>
+    </i:Interaction.Behaviors>
 </Window>
