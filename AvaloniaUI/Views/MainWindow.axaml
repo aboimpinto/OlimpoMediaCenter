@@ -27,8 +27,15 @@
             </StackPanel>    
         </DataTemplate>
 
+        <DataTemplate x:Key="ChannelMatrixItemHighlighted">
+            <StackPanel Margin="10" Orientation="Vertical">
+                <Image Width="200" Stretch="Uniform" Source="{Binding Logo}" />
+                <TextBlock Text="{Binding Name}" Background="Red" />
+            </StackPanel>    
+        </DataTemplate>
+
         <DataTemplate x:Key="ChannelsMatrixRowTemplate">
-            <ItemsControl Items="{Binding}">
+            <ItemsControl Items="{Binding ChannelsRow}">
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
                         <StackPanel Orientation="Horizontal" />
@@ -36,21 +43,9 @@
                 </ItemsControl.ItemsPanel>
 
                 <ItemsControl.DataTemplates>
-                    <views:ChannelItemTemplateSelector>
-                        <DataTemplate x:Key="ChannelMatrixItem">
-                            <StackPanel Margin="10" Orientation="Vertical">
-                                <Image Width="200" Stretch="Uniform" Source="{Binding Logo}" />
-                                <TextBlock Text="{Binding Name}" />
-                            </StackPanel>    
-                        </DataTemplate>
-
-                        <DataTemplate x:Key="ChannelMatrixItemHighlighted">
-                            <StackPanel Margin="10" Orientation="Vertical">
-                                <Image Width="200" Stretch="Uniform" Source="{Binding Logo}" />
-                                <TextBlock Text="{Binding Name}" Background="Red" />
-                            </StackPanel>    
-                        </DataTemplate>
-                    </views:ChannelItemTemplateSelector>
+                    <views:ChannelItemTemplateSelector 
+                        Normal="{StaticResource ChannelMatrixItem}"  
+                        Highlighted="{StaticResource ChannelMatrixItemHighlighted}" />
                 </ItemsControl.DataTemplates>
             </ItemsControl>
         </DataTemplate>

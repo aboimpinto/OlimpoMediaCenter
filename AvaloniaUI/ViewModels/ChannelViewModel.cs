@@ -14,6 +14,7 @@ namespace AvaloniaUI.ViewModels
         private string _name;
         private Bitmap? _logo;
         private bool _highlight;
+        private int _columnId;
 
         public string Name
         {
@@ -29,8 +30,14 @@ namespace AvaloniaUI.ViewModels
 
         public bool Highlight 
         { 
-            get => _highlight; 
+            get => this._highlight; 
             set => this.RaiseAndSetIfChanged(ref this._highlight, value);
+        }
+
+        public int ColumnId 
+        { 
+            get => this._columnId;
+            set => this.RaiseAndSetIfChanged(ref this._columnId, value);
         }
 
         public ChannelViewModel(Channel channel)

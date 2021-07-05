@@ -10,8 +10,9 @@ namespace AvaloniaUI.Views
 {
     public class ChannelItemTemplateSelector : IDataTemplate
     {
-        [Content]
-        public Dictionary<string, IDataTemplate> Templates { get; } = new Dictionary<string, IDataTemplate>();
+        public IDataTemplate Normal { get; set; }
+
+        public IDataTemplate Highlighted { get; set; }
 
         public IControl Build(object param)
         {
@@ -19,15 +20,15 @@ namespace AvaloniaUI.Views
 
             if (viewModel == null)
             {
-                return (IControl)this.Templates.First().Value.Build(param);
+                return this.Normal.Build(param);
             }
 
             if (viewModel.Highlight)
             {
-                return (IControl)this.Templates.Single(x => x.Key == "ChannelMatrixItemHighlighted").Value.Build(param);
+                return this.Highlighted.Build(param);
             }
 
-            return (IControl)this.Templates.Single(x => x.Key == "ChannelMatrixItem").Value.Build(param);
+            return this.Normal.Build(param);
         }
 
         public bool Match(object data)
