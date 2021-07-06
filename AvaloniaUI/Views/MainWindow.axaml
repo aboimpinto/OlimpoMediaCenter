@@ -20,6 +20,17 @@
     </Design.DataContext>
 
     <Window.Resources>
+        <DataTemplate x:Key="ChannelListItem">
+            <TextBlock Text="{Binding Name}" />
+        </DataTemplate>
+
+        <DataTemplate x:Key="ChannelListItemHighlighted">
+            <TextBlock Text="{Binding Name}" Background="Red" />
+        </DataTemplate>
+
+
+
+
         <DataTemplate x:Key="ChannelMatrixItem">
             <StackPanel Margin="10" Orientation="Vertical">
                 <Image Width="200" Stretch="Uniform" Source="{Binding Logo}" />
@@ -62,7 +73,7 @@
             <RowDefinition />
         </Grid.RowDefinitions>
         
-        <ItemsControl 
+        <!-- <ItemsControl 
             Items="{Binding ChannelsMatrix}"
             ItemTemplate="{StaticResource ChannelsMatrixRowTemplate}">
 
@@ -73,7 +84,17 @@
                     </ScrollViewer>
                 </ControlTemplate>
             </ItemsControl.Template>
+        </ItemsControl> -->
+
+        <ItemsControl Items="{Binding ChannelsList, Mode=TwoWay}">
+            <ItemsControl.DataTemplates>
+                    <views:ChannelItemTemplateSelector 
+                        Normal="{StaticResource ChannelListItem}"  
+                        Highlighted="{StaticResource ChannelListItemHighlighted}" />
+                </ItemsControl.DataTemplates>
         </ItemsControl>
+
+        <Button Grid.Row="1" Content="Down" Command="{Binding MoveDownCommand}" />
     </Grid>
 
     <i:Interaction.Behaviors>
